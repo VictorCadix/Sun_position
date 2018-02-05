@@ -65,7 +65,7 @@ double eqTime(Time time) {
 	double eqtime;
 	eqtime = 229.18*(0.000075 + 0.001868*cos(fr_year) - 0.032077*sin(fr_year) - 0.014615*cos(2 * fr_year) - 0.040849*sin(2 * fr_year));
 
-	return eqtime;	//In radians
+	return eqtime;	//In minutes
 }
 
 double declination(Time time) {

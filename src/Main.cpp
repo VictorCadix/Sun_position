@@ -23,5 +23,12 @@ void main() {
 	int day = dayOfYear(time);
 	cout << "day of the year: " << day << endl;
 
+	double eqtime = eqTime(time);
+	cout << "Equation of time: " << eqtime << endl;
+
+	double decl = declination(time);
+	decl = decl * 180 / pi;
+	cout << "Declination: " << decl << " degrees" << endl;
+
 	_getch();
 }
