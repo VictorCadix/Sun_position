@@ -1,5 +1,7 @@
 #pragma once
 
+#define pi 3.14159265358979323846
+
 typedef struct Time {
 	int year;
 	int month;
@@ -48,4 +50,28 @@ int dayOfYear(Time time) {
 	int days = present - past + 1;
 
 	return days;
+}
+
+double fractionalYear(Time time) {
+	double fraction;
+	int dayYear = dayOfYear(time);
+	fraction = 2 * pi / 365 * (dayYear - 1 + (time.hours - 12) / 24);
+
+	return fraction;	// In radians
+}
+
+double eqTime(Time time) {
+	double fr_year = fractionalYear(time);
+	double eqtime;
+	eqtime = 229.18*(0.000075 + 0.001868*cos(fr_year) - 0.032077*sin(fr_year) - 0.014615*cos(2 * fr_year) - 0.040849*sin(2 * fr_year));
+
+	return eqtime;	//In radians
+}
+
+double declination(Time time) {
+	double fr_year = fractionalYear(time);
+	double decl;
+	decl = 0.006918 - 0.399912*cos(fr_year) + 0.070257*sin(fr_year) - 0.006758*cos(2 * fr_year) + 0.000907*sin(2 * fr_year) - 0.002697*cos(3 * fr_year) + 0.00148*sin(3 * fr_year);
+
+	return decl;	//In radians
 }
