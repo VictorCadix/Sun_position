@@ -29,3 +29,23 @@ double JulianDays(Time time) {
 	return eJD;
 }
 
+
+int dayOfYear(Time time) {
+	Time startOfYear;
+	startOfYear.year = time.year;
+	startOfYear.month = 1;
+	startOfYear.day = 1;
+	startOfYear.hours = 12;
+	startOfYear.minutes = 0;
+	startOfYear.seconds = 0;
+
+	time.hours = 12;
+	time.minutes = 0;
+	time.seconds = 0;
+
+	double present = JulianDays(time);
+	double past = JulianDays(startOfYear);
+	int days = present - past + 1;
+
+	return days;
+}

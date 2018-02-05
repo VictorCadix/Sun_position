@@ -20,5 +20,8 @@ void main() {
 	cout.precision(10);
 	cout << "elasped Julian Days: " << eJD << endl;
 
+	int day = dayOfYear(time);
+	cout << "day of the year: " << day << endl;
+
 	_getch();
 }
