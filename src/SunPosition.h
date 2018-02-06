@@ -17,6 +17,11 @@ typedef struct Position {
 	int timezone;
 };
 
+typedef struct SunCoordinates {
+	double azimuth;
+	double altitude;
+};
+
 
 double JulianDays(Time time) {
 	int Y = time.year;
@@ -94,3 +99,25 @@ double trueSolarTime(Time time, Position pos) {
 	return tst;
 }
 
+double hourAngle(double true_solar_time) {
+	double ha = (true_solar_time / 4) - 180;
+	return ha;
+}
+
+void sunCoordinates(Time time, Position pos, SunCoordinates* sun) {
+	double lat = pos.latitude * pi / 180;
+	double decl = declination(time);
+	double tst = trueSolarTime(time, pos);
+	double ha = hourAngle(tst) * pi / 180;
+	
+	double cos_zenithAngle;
+	cos_zenithAngle = sin(lat)*sin(decl) + cos(lat)*cos(decl)*cos(ha);
+	sun->altitude = 90 - acos(cos_zenithAngle) * 180 / pi;
+	
+	double sin_zenithAngle;
+	sin_zenithAngle = sin(acos(cos_zenithAngle));
+	double cos_aux;
+	cos_aux = -(sin(lat)*cos_zenithAngle-sin(decl))/(cos(lat)*sin_zenithAngle);
+	double aux = acos(cos_aux) * 180 / pi;
+	sun->azimuth = 180 - aux;
+}

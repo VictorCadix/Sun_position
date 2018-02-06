@@ -38,5 +38,13 @@ void main() {
 	double tst = trueSolarTime(time, pos);
 	cout << "true solar time: " << tst << endl;
 
+	double ha = hourAngle(tst);
+	cout << "Hour angle: " << ha << endl;
+
+	SunCoordinates sunPos;
+	sunCoordinates(time, pos, &sunPos);
+	cout << "Sun altitude: " << sunPos.altitude << " deg" << endl;
+	cout << "Sun azimuth: " << sunPos.azimuth << " deg" << endl;
+
 	_getch();
 }
