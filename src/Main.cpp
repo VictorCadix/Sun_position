@@ -30,5 +30,13 @@ void main() {
 	decl = decl * 180 / pi;
 	cout << "Declination: " << decl << " degrees" << endl;
 
+	Position pos;
+	pos.latitude = 35.5565;
+	pos.longitude = -115.4708;
+	pos.timezone = -8;
+
+	double tst = trueSolarTime(time, pos);
+	cout << "true solar time: " << tst << endl;
+
 	_getch();
 }

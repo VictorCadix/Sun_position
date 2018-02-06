@@ -11,6 +11,12 @@ typedef struct Time {
 	int seconds;
 };
 
+typedef struct Position {
+	double latitude;
+	double longitude;
+	int timezone;
+};
+
 
 double JulianDays(Time time) {
 	int Y = time.year;
@@ -75,3 +81,16 @@ double declination(Time time) {
 
 	return decl;	//In radians
 }
+
+double trueSolarTime(Time time, Position pos) {
+	double time_offset;
+	double eqtime;
+	eqtime = eqTime(time);
+	time_offset = eqtime + 4 * pos.longitude - 60 * pos.timezone;
+
+	double tst;	//true solar time
+	tst = time.hours * 60 + time.minutes + time.seconds / 60 + time_offset;
+
+	return tst;
+}
+
