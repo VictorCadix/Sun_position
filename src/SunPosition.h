@@ -116,15 +116,16 @@ void sunCoordinates(Time time, Position pos, SunCoordinates* sun) {
 	double ha = hourAngle(tst) * pi / 180;
 	
 	double cos_zenithAngle;
+	double zenithAngle;
 	cos_zenithAngle = sin(lat)*sin(decl) + cos(lat)*cos(decl)*cos(ha);
-	sun->altitude = 90 - acos(cos_zenithAngle) * 180 / pi;
+	zenithAngle = acos(cos_zenithAngle);
+
+	sun->altitude = 90 - zenithAngle * 180 / pi;
 	
-	double sin_zenithAngle;
-	sin_zenithAngle = sin(acos(cos_zenithAngle));
 	double cos_aux;
-	cos_aux = -(sin(lat)*cos_zenithAngle-sin(decl))/(cos(lat)*sin_zenithAngle);
-	double aux = acos(cos_aux) * 180 / pi;
-	sun->azimuth = 180 - aux;
+	cos_aux = -(sin(lat)*cos(zenithAngle)-sin(decl))/(cos(lat)*sin(zenithAngle));
+	double aux = acos(cos_aux);
+	sun->azimuth = 180 - aux * 180 / pi;
 }
 
 void UTCtimeOf_sunrise_sunset(Time time, Position pos, Sunrise_sunet *sun) {
