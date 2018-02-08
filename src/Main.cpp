@@ -48,8 +48,8 @@ void main() {
 
 	Sunrise_sunet sun;
 	UTCtimeOf_sunrise_sunset(time, pos, &sun);
-	cout << "Sunrise at: " << sun.sunrise.hours << ":" << sun.sunrise.minutes << ":" << sun.sunrise.seconds << endl;
-	cout << "Sunset at: " << sun.sunset.hours << ":" << sun.sunset.minutes << ":" << sun.sunset.seconds << endl;
-	cout << "Noon at: " << sun.noon.hours << ":" << sun.noon.minutes << ":" << sun.noon.seconds << endl;
+	cout << "Sunrise at: " << sun.sunrise.hours + pos.timezone << ":" << sun.sunrise.minutes << ":" << sun.sunrise.seconds << endl;
+	cout << "Sunset at: " << sun.sunset.hours + pos.timezone << ":" << sun.sunset.minutes << ":" << sun.sunset.seconds << endl;
+	cout << "Noon at: " << sun.noon.hours + pos.timezone << ":" << sun.noon.minutes << ":" << sun.noon.seconds << endl;
 	_getch();
 }
