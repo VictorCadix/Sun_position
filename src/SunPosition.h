@@ -23,9 +23,9 @@ typedef struct SunCoordinates {
 };
 
 typedef struct Sunrise_sunet {
-	double sunrise;
-	double sunset;
-	double noon;
+	Time sunrise;
+	Time sunset;
+	Time noon;
 };
 
 double JulianDays(Time time) {
@@ -138,7 +138,18 @@ void UTCtimeOf_sunrise_sunset(Time time, Position pos, Sunrise_sunet *sun) {
 
 	double eqtime = eqTime(time);
 	//in minutes
-	sun->sunrise = 720 - 4 * (pos.longitude + ha * 180 / pi) - eqtime;
-	sun->sunset = 720 - 4 * (pos.longitude - ha * 180 / pi) - eqtime;
-	sun->noon = 720 - 4 * pos.longitude - eqtime;
+	double sunrise = 720 - 4 * (pos.longitude + ha * 180 / pi) - eqtime;
+	sun->sunrise.hours = sunrise / 60;
+	sun->sunrise.minutes = sunrise - sun->sunrise.hours * 60;
+	sun->sunrise.seconds = (sunrise - sun->sunrise.hours * 60 - sun->sunrise.minutes)*60;
+	
+	double sunset = 720 - 4 * (pos.longitude - ha * 180 / pi) - eqtime;
+	sun->sunset.hours = sunset / 60;
+	sun->sunset.minutes = sunset - sun->sunset.hours * 60;
+	sun->sunset.seconds = (sunset - sun->sunset.hours * 60 - sun->sunset.minutes) * 60;
+
+	double noon = 720 - 4 * pos.longitude - eqtime;
+	sun->noon.hours = noon / 60;
+	sun->noon.minutes = noon - sun->noon.hours * 60;
+	sun->noon.seconds = (noon - sun->noon.hours * 60 - sun->noon.minutes) * 60;
 }
