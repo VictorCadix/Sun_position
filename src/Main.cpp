@@ -46,5 +46,10 @@ void main() {
 	cout << "Sun altitude: " << sunPos.altitude << " deg" << endl;
 	cout << "Sun azimuth: " << sunPos.azimuth << " deg" << endl;
 
+	Sunrise_sunet sun;
+	UTCtimeOf_sunrise_sunset(time, pos, &sun);
+	cout << "Sunrise at: " << sun.sunrise << "min" << endl;
+	cout << "Sunset at: " << sun.sunset << "min" << endl;
+	cout << "Noon at: " << sun.noon << "min" << endl;
 	_getch();
 }

@@ -22,6 +22,11 @@ typedef struct SunCoordinates {
 	double altitude;
 };
 
+typedef struct Sunrise_sunet {
+	double sunrise;
+	double sunset;
+	double noon;
+};
 
 double JulianDays(Time time) {
 	int Y = time.year;
@@ -120,4 +125,19 @@ void sunCoordinates(Time time, Position pos, SunCoordinates* sun) {
 	cos_aux = -(sin(lat)*cos_zenithAngle-sin(decl))/(cos(lat)*sin_zenithAngle);
 	double aux = acos(cos_aux) * 180 / pi;
 	sun->azimuth = 180 - aux;
+}
+
+void UTCtimeOf_sunrise_sunset(Time time, Position pos, Sunrise_sunet *sun) {
+	double ha;	//hour angle
+	double lat = pos.latitude*pi / 180;
+	double decl = declination(time);
+	
+	//ha in rad
+	ha = acos((cos(90.833*pi/180)) / (cos(lat)*cos(decl)) - tan(lat)*tan(decl));
+
+	double eqtime = eqTime(time);
+	//in minutes
+	sun->sunrise = 720 - 4 * (pos.longitude + ha * 180 / pi) - eqtime;
+	sun->sunset = 720 - 4 * (pos.longitude - ha * 180 / pi) - eqtime;
+	sun->noon = 720 - 4 * pos.longitude - eqtime;
 }
