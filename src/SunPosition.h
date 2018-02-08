@@ -28,6 +28,16 @@ typedef struct Sunrise_sunet {
 	Time noon;
 };
 
+void min2time(double minutes, Time* time) {
+	int hour = minutes / 60;
+	int min = minutes - hour * 60;
+	int sec = (minutes - hour * 60 - min) * 60;
+
+	time->hours = hour;
+	time->minutes = min;
+	time->seconds = sec;
+}
+
 double JulianDays(Time time) {
 	int Y = time.year;
 	int M = time.month;
@@ -138,18 +148,13 @@ void UTCtimeOf_sunrise_sunset(Time time, Position pos, Sunrise_sunet *sun) {
 
 	double eqtime = eqTime(time);
 	//in minutes
-	double sunrise = 720 - 4 * (pos.longitude + ha * 180 / pi) - eqtime;
-	sun->sunrise.hours = sunrise / 60;
-	sun->sunrise.minutes = sunrise - sun->sunrise.hours * 60;
-	sun->sunrise.seconds = (sunrise - sun->sunrise.hours * 60 - sun->sunrise.minutes)*60;
 	
+	double sunrise = 720 - 4 * (pos.longitude + ha * 180 / pi) - eqtime;
+	min2time(sunrise, &sun->sunrise);
+
 	double sunset = 720 - 4 * (pos.longitude - ha * 180 / pi) - eqtime;
-	sun->sunset.hours = sunset / 60;
-	sun->sunset.minutes = sunset - sun->sunset.hours * 60;
-	sun->sunset.seconds = (sunset - sun->sunset.hours * 60 - sun->sunset.minutes) * 60;
+	min2time(sunset, &sun->sunset);
 
 	double noon = 720 - 4 * pos.longitude - eqtime;
-	sun->noon.hours = noon / 60;
-	sun->noon.minutes = noon - sun->noon.hours * 60;
-	sun->noon.seconds = (noon - sun->noon.hours * 60 - sun->noon.minutes) * 60;
+	min2time(noon, &sun->noon);
 }
