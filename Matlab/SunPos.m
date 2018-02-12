@@ -8,6 +8,7 @@ time = [Y M D 12 0 0]
 day = 43;
 
 %position
+latitude = 40.4534;
 longitude = -3.7269;
 timezone = +1;
 
@@ -16,3 +17,4 @@ fractYear_rad = fractionalYear(time(4),day)
 eqtime = eqTime(fractYear_rad)
 tst = trueSolarTime(eqtime,longitude,timezone,time)
 ha = hourAngle(tst)
+[altitude,azimuth] = sunCoordinates(latitude,decl,ha)
