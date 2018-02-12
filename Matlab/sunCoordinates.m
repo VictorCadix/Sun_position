@@ -6,7 +6,7 @@ zenith = acosd(cos_zenith);
 altitude = 90-zenith;
 
 % azimuth calculation
-aux = -((sind(latitude)*cosd(zenith)-sind(declination))/(cosd(latitude)*sind(zenith)));
+aux = -(sind(latitude)*cosd(zenith)-sind(declination))/(cosd(latitude)*sind(zenith));
 aux = acosd(aux);
 azimuth = 180-aux;
 
