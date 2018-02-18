@@ -14,9 +14,9 @@ timezone = +1;
 location = [latitude,longitude,timezone];
 
 %{
-decl = declination(day)
+decl = declination(day,1)
 fractYear_rad = fractionalYear(time(4),day)
-eqtime = eqTime(fractYear_rad)
+eqtime = eqTime(fractYear_rad,1)
 tst = trueSolarTime(eqtime,longitude,timezone,time)
 ha = hourAngle(tst)
 [altitude,azimuth] = sunCoordinates(latitude,decl,ha)
