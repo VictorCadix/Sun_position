@@ -5,7 +5,7 @@ latitude = location(1);
 longitude = location(2);
 timezone = location(3);
 
-decl = declination(yearDay);
+decl = declination(yearDay,1);
 fractYear_rad = fractionalYear(time(4),yearDay)
 eqtime = eqTime(fractYear_rad)
 
