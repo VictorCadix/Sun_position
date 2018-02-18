@@ -22,6 +22,6 @@ ha = hourAngle(tst)
 [altitude,azimuth] = sunCoordinates(latitude,decl,ha)
 %}
 
-[altitude,azimuth,data] = sunPosition(time,location);
+[altitude,azimuth,data] = sunPosition(time,location,1);
 altitude
 azimuth

@@ -1,4 +1,4 @@
-function [ altitude,azimuth,data ] = sunPosition( time,location )
+function [ altitude,azimuth,data ] = sunPosition( time,location,graph )
 
 yearDay = 43;
 latitude = location(1);
@@ -9,8 +9,7 @@ decl = declination(yearDay);
 fractYear_rad = fractionalYear(time(4),yearDay)
 eqtime = eqTime(fractYear_rad)
 
-%plot today trajectory
-%%{
+%calculate today trajectory
 data = zeros(24,3);
 hour_backup = time(4);
 for hour = 0:0.25:24
@@ -28,17 +27,26 @@ for hour = 0:0.25:24
         cont = cont+1;
     end
 end
-figure('Name','Sun Position','NumberTitle','off');
-plot(data(:,3),data(:,2));
-hold on
-%}
 time(4) = hour_backup;
+
+%plot trayectory
+if graph == 1
+    figure('Name','Sun Position','NumberTitle','off');
+    plot(data(:,3),data(:,2));
+    hold on
+    y = zeros(49,1);
+    plot(data(:,3),y)
+end
+
 tst = trueSolarTime(eqtime,longitude,timezone,time);
 ha = hourAngle(tst);
 [altitude,azimuth] = sunCoordinates(latitude,decl,ha);
 
-plot(azimuth,altitude,'*')
-hold off
+%plot position
+if graph == 1
+    plot(azimuth,altitude,'*')
+    hold off
+end
 
 end
 
