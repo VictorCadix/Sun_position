@@ -7,7 +7,7 @@ timezone = location(3);
 
 decl = declination(yearDay,1);
 fractYear_rad = fractionalYear(time(4),yearDay)
-eqtime = eqTime(fractYear_rad)
+eqtime = eqTime(fractYear_rad,1)
 
 %calculate today trajectory
 data = zeros(24,3);
