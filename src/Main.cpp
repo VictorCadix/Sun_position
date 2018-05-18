@@ -53,7 +53,7 @@ void main() {
 	cout << "Noon at: " << sun.noon.hours + pos.timezone << ":" << sun.noon.minutes << ":" << sun.noon.seconds << endl;
 
 
-	cout << "Test trayectory" << endl;
+	cout << endl << "Test trayectory" << endl;
 	float trayectory[15][3] = { { 150,1.9,110.6 },{ 200,9.7,118.3 },{ 250,16.9,126.7 },{ 300,23.3,136.1 },{ 350,28.7,146.7 },{ 400,32.6,158.5 },{ 450,34.8,171.4 },{ 500,35.2,184.7 },{ 550,33.4,197.7 },{ 600,30.0,209.9 },{ 650,25.1,220.9 },{ 700,18.9,230.6 },{ 750,11.9,239.3 },{ 800,4.27,247.1 },{ 850,0,90 } }; //8 puntos
 	int totalTrayec = 15;
 	int deltaTime = 60; //seconds
@@ -82,5 +82,12 @@ void main() {
 		cout << "trayect[" << i << "][1] = " << trayectory[i][1] << endl;
 		cout << "trayect[" << i << "][2] = " << trayectory[i][2] << endl;
 	}
+
+	cout << endl;
+
+	for (int i = 0; i < totalTrayec; i++) {
+		cout << trayectory[i][0] << "\t" << trayectory[i][1] << "\t" << trayectory[i][1] << endl;
+	}
+
 	_getch();
 }
