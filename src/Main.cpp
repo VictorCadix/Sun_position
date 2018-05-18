@@ -76,5 +76,11 @@ void main() {
 		}
 
 	} //Fin bucle for
+
+	for (int i = 0; i < totalTrayec; i++) {
+		cout << "trayect[" << i << "][0] = " << trayectory[i][0] << endl;
+		cout << "trayect[" << i << "][1] = " << trayectory[i][1] << endl;
+		cout << "trayect[" << i << "][2] = " << trayectory[i][2] << endl;
+	}
 	_getch();
 }
