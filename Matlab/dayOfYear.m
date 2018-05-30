@@ -17,6 +17,7 @@ while i < m
     else
         doy = doy + 30;
     end
+    i = i + 1;
 end
 
 doy = doy + d;
