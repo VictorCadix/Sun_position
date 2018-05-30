@@ -1,6 +1,6 @@
 function [ altitude,azimuth,data ] = sunPosition( time,location,graph )
 
-yearDay = 43;
+yearDay = dayOfYear(time);
 latitude = location(1);
 longitude = location(2);
 timezone = location(3);
