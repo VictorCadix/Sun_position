@@ -34,7 +34,8 @@ if graph == 1
     figure('Name','Sun Position','NumberTitle','off');
     plot(data(:,3),data(:,2));
     hold on
-    y = zeros(49,1);
+    sz = size(data)
+    y = zeros(sz(1),1);
     plot(data(:,3),y)
 end
 
