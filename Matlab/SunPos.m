@@ -2,10 +2,10 @@ clear %comment if needed
 
 %date and time
 Y = 2018
-M = 2
-D = 12
-time = [Y M D 12 0 0];
-day = 43;
+M = 6
+D = 19
+time = [Y M D 17 30 0];
+yearDay = dayOfYear(time)
 
 %position
 latitude = 40.4534;
